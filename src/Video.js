@@ -8,9 +8,32 @@ function Video({ url, channel, description, song, likes, messages, shares }) {
   const [offset, setOffset] = useState(0);
   const videoRef = useRef(null);
 
+  
+  useEffect(() => {
+    let options = {
+      rootMargin: "0px",
+      threshold: [0.25, 0.75]
+    };
+
+    let handlePlay = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          videoRef.current.play();
+          setPlaying(true);
+        } else {
+          videoRef.current.pause();
+          setPlaying(false);
+        }
+      });
+    };
+
+    let observer = new IntersectionObserver(handlePlay, options);
+
+    observer.observe(videoRef.current);
+  });
+
 
   const onVideoPress = () => {
-    console.log(offset)
     if (playing) {
       videoRef.current.pause();
       setPlaying(false);
@@ -20,7 +43,7 @@ function Video({ url, channel, description, song, likes, messages, shares }) {
     }
   };
 
-  
+
 
   return (
     <div className="video">
