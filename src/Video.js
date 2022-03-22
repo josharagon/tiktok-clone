@@ -1,13 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import VideoFooter from "./VideoFooter";
 import VideoSidebar from "./VideoSidebar";
 import "./Video.css";
 
 function Video({ url, channel, description, song, likes, messages, shares }) {
   const [playing, setPlaying] = useState(false);
+  const [offset, setOffset] = useState(0);
   const videoRef = useRef(null);
 
+
   const onVideoPress = () => {
+    console.log(offset)
     if (playing) {
       videoRef.current.pause();
       setPlaying(false);
@@ -16,6 +19,8 @@ function Video({ url, channel, description, song, likes, messages, shares }) {
       setPlaying(true);
     }
   };
+
+  
 
   return (
     <div className="video">
