@@ -8,11 +8,10 @@ function Video({ url, channel, description, song, likes, messages, shares }) {
   const [offset, setOffset] = useState(0);
   const videoRef = useRef(null);
 
-  
   useEffect(() => {
     let options = {
       rootMargin: "0px",
-      threshold: [0.25, 0.75]
+      threshold: [0.25, 0.75],
     };
 
     let handlePlay = (entries, observer) => {
@@ -32,7 +31,6 @@ function Video({ url, channel, description, song, likes, messages, shares }) {
     observer.observe(videoRef.current);
   });
 
-
   const onVideoPress = () => {
     if (playing) {
       videoRef.current.pause();
@@ -43,8 +41,6 @@ function Video({ url, channel, description, song, likes, messages, shares }) {
     }
   };
 
-
-
   return (
     <div className="video">
       <video
@@ -54,7 +50,7 @@ function Video({ url, channel, description, song, likes, messages, shares }) {
         ref={videoRef}
         src={url}
       ></video>
-      <VideoFooter channel={'sup'} description={'yooo'} song={'this song'} />
+      <VideoFooter channel={"sup"} description={"yooo"} song={"this song"} />
       <VideoSidebar likes={likes} messages={messages} shares={shares} />
     </div>
   );
